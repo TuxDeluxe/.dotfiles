@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+POLYBAR=$(set.polybar; mainvariable)
+
+PICOM=$(set.picom; mainvariable)
+
+I3=$(set.i3; mainvariable)
+
+SWAY=$(set.sway; mainvariable)
+
+WAYBAR=$(set.waybar; mainvariable)
+
+KITTY=$(set.kitty; mainvariable)
+
+FISH=$(set.fish; mainvariable)
+
+BASHRC=$(set.bashrc; mainvariable)
+
+PAM_ENVIRONMENT=$(set.pam_environment; mainvariable)
+
+ZSHRC=$(set.zshrc; mainvariable)
+
+RANDOMIZEWALLPAPERS=$(set.randomizewallpapers; mainvariable)

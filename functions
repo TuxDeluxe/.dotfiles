@@ -1,0 +1,115 @@
+#!/bin/env bash
+
+link () {
+echo ""
+echo "SYMLINKING $PWD/$1 $2 to $HOME/$1"
+echo ""
+
+	if [[ -f $HOME/$1 ]]; then
+		cp "$HOME/$1" "$HOME/$1.backup";
+		rm "$HOME/$1";
+		echo ""
+		echo "BACKING UP $HOME/$1 to $HOME/$1.backup"
+		echo ""
+	fi
+	
+	mkdir -p "$(dirname "$HOME/$1")"
+	
+	if [ "$HOME/$1" == "$HOME/" ]; then
+		echo "CRITICAL! NO FILE GIVEN! ABORTING TO PROTECT FILES!";
+	else
+		ln -s "$PWD/$1" "$HOME/$1"
+	fi
+	
+	if [ -n "$2" ]; then
+		if [ -f "$HOME/$2" ]; then
+			cp "$HOME/$2" "$HOME/$2.backup";
+			rm "$HOME/$2";
+			echo ""
+			echo "BACKING UP $HOME/$2 to $HOME/$2.backup"
+			echo ""
+		fi
+	ln -s "$PWD/$2" "$HOME/$2";
+	fi
+}
+
+mainvariable () {
+
+if [ $NAME == "polybar" ] | [ $NAME == "waybar" ] | [ $NAME == "randomizewallpapers" ]; then
+	if [[ -f "$HOME/$CPATH" ]] && [[ -f "$HOME/$CPATH.backup" ]] || [[ -f "$HOME/$CPATH2" ]] && [[ -f "$HOME/$CPATH2.backup" ]]; then echo -e "\e[33m$NAME\e[0m"; 
+		elif [[ -f "$HOME/$CPATH" ]]; then echo -e "\e[32m$NAME\e[0m"; 
+		else echo -e "\e[31m$NAME\e[0m";
+	fi
+else
+	if [[ -f "$HOME/$CPATH" ]] && [[ -f "$HOME/$CPATH.backup" ]]; then echo -e "\e[33m$NAME\e[0m"; 
+		elif [[ -f "$HOME/$CPATH" ]]; then echo -e "\e[32m$NAME\e[0m"; 
+		else echo -e "\e[31m$NAME\e[0m";
+	fi
+fi
+}
+
+sed.randomizewallpapers () { 
+echo "$PWD/.config/systemd/user/randomizewallpapers.service"
+sed -i 's/user/'"$USER"'/g' "$PWD/$1"
+sed -i '10,$s/'"$USER"'/user/g' "$PWD/$1"
+
+}
+
+
+set.polybar () {
+	CPATH=.config/polybar/config
+	CPATH2=.config/polybar/launch.sh
+	NAME="polybar"
+}
+
+set.picom () {
+	CPATH=.config/picom/picom.conf
+	NAME="picom"
+}
+
+set.sway () {
+	CPATH=.config/sway/config
+	NAME="sway"
+}
+
+set.i3 () {
+	CPATH=.config/i3/config
+	NAME="i3"
+}
+
+set.waybar () {
+	CPATH=.config/waybar/config
+	CPATH2=.config/waybar/style.css
+	NAME="waybar"
+}
+
+set.kitty () {
+	CPATH=.config/kitty/kitty.conf
+	NAME="kitty"
+}
+
+set.fish () {
+	CPATH=.config/fish/config.fish
+	NAME="fish"
+}
+
+set.bashrc () { 
+	CPATH=".bashrc"
+	NAME=".bashrc"
+}
+
+set.pam_environment () {
+	CPATH=".pam_environment"
+	NAME=".pam_environment"
+}
+
+set.zshrc () {
+	CPATH=".zshrc"
+	NAME=".zshrc"
+}
+
+set.randomizewallpapers () {
+	CPATH=".config/systemd/user/randomizewallpapers.service"
+	CPATH2=".config/systemd/user/randomizewallpapers.timer"
+	NAME="randomizewallpapers"
+}

@@ -1,0 +1,465 @@
+;==========================================================
+;
+;
+;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/polybar/polybar
+;
+;   The README contains a lot of information
+;
+;==========================================================
+
+[colors]
+;background = ${xrdb:color0:#222}
+background = #1F1F1F
+background-alt = #444
+;foreground = ${xrdb:color7:#222}
+foreground = #ababab
+foreground-alt = #ffffff
+primary = #ffb52a
+secondary = #e60053
+alert = #bd2c40
+red = #cd0e48
+cyan = #2344ce
+green = #08b54c
+purple = #9f78e1
+amber = #e0931c
+shade1 = #1B5E20
+shade2 = #2E7D32
+shade3 = #388E3C
+shade4 = #43A047
+shade5 = #4CAF50
+shade6 = #66BB6A
+shade7 = #81C784
+shade8 = #A5D6A7
+archcolor = #1793d1
+firefox = #f62336
+
+[bar/example]
+;monitor = ${env:DISPLAY=:0}
+width = 100%
+height = 25
+offset-x = 0%
+offset-y = 0%
+radius = 0
+fixed-center = true
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 2
+line-color = ${colors.alert}
+
+border-size = 0
+border-left-size = 0
+border-right-size = 0
+border-bottom-size = 0
+border-top-size = 0
+border-color = #00000000
+
+padding-left = 0
+padding-right = 0
+padding-bottom = 0
+
+module-margin-left = 1
+module-margin-right = 1
+
+font-0 = DejaVu Sans Mono:style=Book:antialis=true:size=10;3
+font-1 = "Symbols Nerd Font:style=2048-em:pixelsize=36;9"
+font-2 = "Symbols Nerd Font:style=2048-em:pixelsize=15:antialias=true;3"
+font-3 = Terminus:style=Regular:pixelsize=15;3
+
+# modules-left = bspwm
+modules-left = launcher i3
+modules-center = xwindow
+modules-right = filesystem pulseaudio eth cpu temperature time
+
+tray-position = right
+tray-padding = 5
+tray-background = ${colors.background}
+tray-offset-x = 0
+tray-detached = false
+
+
+wm-restack = i3
+
+override-redirect = false
+bottom = true
+
+;scroll-up = bspwm-desknext
+;scroll-down = bspwm-deskprev
+
+
+;scroll-up = i3wm-wsnext
+;scroll-down = i3wm-wsprev
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[section/arrowright0]
+type=custom/text
+content= ""
+content-font = 1
+
+[module/arrowright1]
+inherit = section/arrowright0
+content-background = ${colors.shade2}
+content-foreground = ${colors.shade1}
+
+[module/arrowright2]
+inherit = section/arrowright0
+content-background = ${colors.shade5}
+content-foreground = ${colors.shade4}
+
+[module/arrowright3]
+inherit = section/arrowright0
+content-background = ${colors.shade3}
+content-foreground = ${colors.shade2}
+
+[module/arrowright4]
+inherit = section/arrowright0
+content-background = ${colors.shade4}
+content-foreground = ${colors.shade3}
+
+[module/arrowright5]
+inherit = section/arrowright0
+content-background = ${colors.background}
+content-foreground = ${colors.shade5}
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:30:-%
+label-empty = No window
+label-font = 4
+label-empty-font = 4
+
+[module/launcher]
+type=custom/menu
+expand-right = true
+
+format-spacing = 1
+
+label-open = "  "
+label-open-font = 3
+label-open-foreground = ${colors.foreground-alt}
+label-close = "  "
+label-close-foreground = ${colors.foreground-alt}
+label-close-font = 3
+label-separator = |
+label-separator-foreground = ${colors.foreground-alt}
+label-open-background = ${colors.archcolor}
+label-close-background = ${colors.secondary}
+
+menu-0-1 = "powermenu "
+menu-0-1-exec = #launcher.open.1
+menu-0-0 = apps
+menu-0-0-exec = rofi -combi-modi window,drun,ssh -theme solarized -font "hack 10" -show combi -icon-theme "Papirus" -show-icons
+
+menu-1-0 = reboot
+menu-1-0-exec = reboot
+menu-1-1 = poweroff
+menu-1-1-exec = poweroff
+menu-1-2 = hibernate
+menu-1-2-exec = systemctl hybrid-sleep
+menu-1-3 = "lock "
+menu-1-3-exec = xset dpms force off; i3lock-fancy
+
+menu-3-0 = back
+menu-3-0-exec = #launcher.open.0
+menu-3-1 = reboot
+menu-3-1-exec = reboot
+
+menu-4-0 = back
+menu-4-0-exec = #launcher.open.0
+menu-4-1 = poweroff
+menu-4-1-exec = poweroff
+
+menu-5-0 = back
+menu-5-0-exec = #launcher.open.0
+menu-5-1 = hibernate
+menu-5-1-exec = systemctl hybrid-sleep
+
+menu-6-0 = back
+menu-6-0-exec = #launcher.open.0
+menu-6-1 = "lock "
+menu-6-1-exec = xset dpms force off; i3lock-fancy
+
+[module/firefox]
+type=custom/text
+content = " "
+content-font = 3
+content-foreground = ${colors.firefox}
+click-left = firefox
+
+[module/xkeyboard]
+type = internal/xkeyboard
+blacklist-0 = num lock
+
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-underline = ${colors.secondary}
+
+label-layout = %layout%
+label-layout-underline = ${colors.secondary}
+
+label-indicator-padding = 2
+label-indicator-margin = 1
+label-indicator-background = ${colors.secondary}
+label-indicator-underline = ${colors.secondary}
+
+[module/filesystem]
+type = internal/fs
+interval = 25
+
+mount-0 = /
+format-prefix =
+label-mounted = / %percentage_used%%
+label-unmounted = %mountpoint% unmounted
+label-unmounted-foreground = ${colors.foreground-alt}
+label-mounted-font = 3
+label-mounted-background = ${colors.background}
+label-mounted-underline = ${colors.archcolor}
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+
+; Only show workspaces on the same output as the bar
+;pin-workspaces = true
+
+label-mode-padding = 2
+label-mode-foreground = #000
+label-mode-background = ${colors.primary}
+
+; focused = Active workspace on focused monitor
+label-focused = %index%
+label-focused-background = ${colors.background-alt}
+label-focused-underline= ${colors.primary}
+label-focused-padding = 2
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %index%
+label-unfocused-padding = 2
+
+; visible = Active workspace on unfocused monitor
+label-visible = %index%
+label-visible-background = ${self.label-focused-background}
+label-visible-underline = ${self.label-focused-underline}
+label-visible-padding = ${self.label-focused-padding}
+
+; urgent = Workspace with urgency hint set
+label-urgent = %index%
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 2
+
+; Separator in between workspaces
+; label-separator = |
+
+
+[module/mpd]
+type = internal/mpd
+format-online = <label-song>  <icon-prev> <icon-stop> <toggle> <icon-next>
+
+icon-prev = 
+icon-stop = 
+icon-play = 
+icon-pause = 
+icon-next = 
+
+label-song-maxlen = 25
+label-song-ellipsis = true
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+format-prefix = " "
+format-font = 3
+format-prefix-foreground = ${colors.foreground}
+format-background = ${colors.background}
+label = %percentage:2%%
+label-underline = ${colors.red}
+format-underline = ${colors.red}
+
+[module/memory]
+type = internal/memory
+interval = 2
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+format-underline = #4bffdc
+label = %percentage_used:2%%
+
+[module/wlan]
+type = internal/network
+interface = wlp3s0f0u9
+interval = 3.0
+
+format-connected = <ramp-signal> <label-connected>
+label-connected = %essid%
+format-connected-background = ${colors.shade5}
+
+format-disconnected =
+;format-disconnected = <label-disconnected>
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground-alt}
+
+ramp-signal-0 = 
+ramp-signal-1 = 
+ramp-signal-2 = 
+ramp-signal-3 = 
+ramp-signal-4 = 
+ramp-signal-foreground = ${colors.foreground}
+
+[module/eth]
+type = internal/network
+interface = enp34s0
+interval = 3.0
+
+format-connected-underline = #55aa55
+format-connected-prefix = " "
+format-connected-prefix-foreground = ${colors.foreground-alt}
+label-connected = %local_ip%
+
+format-disconnected =
+;format-disconnected = <label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground-alt}
+
+[module/time]
+type = internal/date
+interval = 5
+
+time = %H:%M
+date = %d-%m-%y%
+
+label = " %date% |  %time%"
+label-font = 3
+format-background = ${colors.background}
+format-foreground = ${colors.foreground}
+label-underline = ${colors.purple}
+format-underline = ${colors.purple}
+
+[module/pulseaudio]
+type = internal/pulseaudio
+
+format-volume =  <label-volume>
+format-volume-underline = ${colors.cyan}
+label-volume = %percentage%%
+label-volume-underline = ${colors.cyan}
+label-volume-foreground = ${colors.foreground}
+label-volume-background = ${colors.background}
+format-volume-foreground = ${colors.foreground}
+format-volume-background = ${colors.background}
+label-volume-font = 1
+format-volume-font = 3
+
+label-muted = "婢 --%"
+label-muted-foreground = ${colors.alert}
+label-muted-background = ${colors.background}
+label-muted-underline = ${colors.cyan}
+label-muted-font = 3
+
+click-right = pavucontrol
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 0
+danger-temperature = 0
+base-temperature = 30
+warn-temperature = 60
+hwmon-path = /sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon0/temp1_input
+
+format = <label>
+format-background = ${colors.background}
+format-foreground = ${colors.foreground}
+
+label =  %temperature-c%
+label-warn =  %temperature-c%
+label-danger =  %temperature-c%
+label-underline = ${colors.green}
+label-warn-underline = ${colors.green}
+label-danger-underline = ${colors.green}
+label-warn-foreground = ${colors.amber}
+label-warn-background = ${colors.background}
+label-foreground = ${colors.green}
+label-danger-foreground = ${colors.alert}
+label-danger-background = ${colors.background}
+label-font = 3
+label-warn-font = 3
+label-danger-font = 3
+
+click-left = psensor
+
+ramp-0 =
+ramp-1 =
+ramp-2 =
+ramp-font = 3
+
+[module/powermenu]
+type = custom/menu
+
+expand-right = true
+
+format-spacing = 1
+
+label-open = "  "
+label-open-foreground = ${colors.secondary}
+label-close =  cancel
+label-close-foreground = ${colors.secondary}
+label-separator = |
+label-separator-foreground = ${colors.foreground-alt}
+format-background = ${colors.green}
+format-foreground = ${colors.foreground}
+format-font = 3
+
+menu-0-0 = reboot
+menu-0-0-exec = #powermenu.open.1
+menu-0-1 = poweroff
+menu-0-1-exec = #powermenu.open.2
+menu-0-2 = hibernate
+menu-0-2-exec = #powermenu.open.3
+menu-0-3 = lock
+menu-0-3-exec = #powermenu.open.4
+
+menu-1-0 = back
+menu-1-0-exec = #powermenu.open.0
+menu-1-1 = reboot
+menu-1-1-exec = reboot
+
+menu-2-0 = back
+menu-2-0-exec = #powermenu.open.0
+menu-2-1 = poweroff
+menu-2-1-exec = poweroff
+
+menu-3-0 = back
+menu-3-0-exec = #powermenu.open.0
+menu-3-1 = hibernate
+menu-3-1-exec = systemctl hybrid-sleep
+
+menu-4-0 = back
+menu-4-0-exec = #powermenu.open.0
+menu-4-1 = lock
+menu-4-1-exec = xset dpms force off; i3lock-fancy
+
+[settings]
+screenchange-reload = true
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
+;pseudo-transparency = false
+
+[global/wm]
+margin-top = 5
+margin-bottom = 5
+
+; vim:ft=dosini
