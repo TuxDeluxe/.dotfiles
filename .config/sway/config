@@ -243,9 +243,11 @@ set $menu wofi --conf=/etc/wofi/config --style=/etc/wofi/style.css
 # Themes
 exec_always {
     systemctl --user import-environment
-    gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
+    gsettings set org.gnome.desktop.interface gtk-theme 'Nordic-darker-v40'
     gsettings set org.gnome.desktop.interface icon-theme 'Adwaita'
-    gsettings set org.gnome.desktop.interface cursor-theme 'Adwaita'
+    gsettings set org.gnome.desktop.interface cursor-theme 'Sweet-cursors'
     test -e $SWAYSOCK.wob || mkfifo $SWAYSOCK.wob
     tail -f $SWAYSOCK.wob | wob
 }
+# Wallpaper settings
+output * bg /usr/share/wallpapers/default-1920x1080.jpg fill
