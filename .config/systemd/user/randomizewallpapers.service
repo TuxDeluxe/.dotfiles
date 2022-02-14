@@ -1,0 +1,10 @@
+[Unit]
+Description=Service for randomizing wallpapers.
+
+[Service]
+Type=forking
+ExecStart=/home/user/bin/randomscript.sh
+User=user
+
+[Install]
+WantedBy=multi-user.target
